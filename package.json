@@ -1,0 +1,22 @@
+{
+  "name": "rx-test",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "start": "broccoli serve",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "broccoli": "^0.16.5",
+    "broccoli-babel-transpiler": "^5.4.2",
+    "broccoli-browserify": "^0.1.0",
+    "broccoli-merge-trees": "^0.2.2",
+    "broccoli-static-compiler": "^0.2.1",
+    "rx": "^3.0.0"
+  },
+  "dependencies": {}
+}
