@@ -15,12 +15,7 @@ var htmlTree = staticCompiler('app', {
     destDir: '/'
 });
 
-var bowerTree = staticCompiler('bower_components', {
-    srcDir: '/',
-    destDir: '/bower_components'
-});
-
 var es5Tree = babelTranspiler(es6Tree);
 var browserifiedTree = browserify(es5Tree, {entries: ['./javascript/index.js']});
 
-module.exports = mergeTrees([browserifiedTree, htmlTree, bowerTree]);
+module.exports = mergeTrees([browserifiedTree, htmlTree]);
