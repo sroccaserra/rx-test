@@ -1,24 +1,29 @@
 import * as Rx from 'rx';
 
-$(function () {
-    var refreshButton = document.querySelector('.refresh');
-    var refreshClickStream = Rx.Observable.fromEvent(refreshButton, 'click');
+$(() => {
+    const refreshButton = document.querySelector('.refresh');
+    const refreshClickStream = Rx.Observable.fromEvent(refreshButton, 'click');
 
-    var requestStream = refreshClickStream
+    const requestStream = refreshClickStream
         .map(() => {
-            var randomOffset = Math.floor(Math.random()*500);
+            const randomOffset = Math.floor(Math.random()*500);
             return 'https://api.github.com/users?since=' + randomOffset;
-        }).startWith('https://api.github.com/users');
+        })
+        .startWith('https://api.github.com/users');
 
-    var responseStream = requestStream.flatMap((requestUrl) => {
-        return Rx.Observable.fromPromise($.getJSON(requestUrl));
-    });
+    const responseStream = requestStream.flatMap(
+        (requestUrl) => Rx.Observable.fromPromise($.getJSON(requestUrl))
+    );
 
-    responseStream.subscribe(function(response) {
-        var first = response[0];
+    responseStream.subscribe((response) => {
+        const [first, second, third] = response;
         document.getElementById('result').innerHTML = `
             ${first.login}
             <img src="${first.avatar_url}" width="auto" height="50px">
+            ${second.login}
+            <img src="${second.avatar_url}" width="auto" height="50px">
+            ${third.login}
+            <img src="${third.avatar_url}" width="auto" height="50px">
         `
     });
 });
